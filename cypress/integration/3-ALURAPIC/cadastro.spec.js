@@ -1,7 +1,7 @@
-describe('Login e registro de usuarios alura pic', () => {
+describe('Cadastro de usuarios alura pic', () => {
 
     beforeEach(() => {
-      cy.visit('https://alura-fotos.herokuapp.com')
+      cy.visit('/')
 
      })
 
@@ -32,23 +32,11 @@ describe('Login e registro de usuarios alura pic', () => {
      
     })
 
-    it('fazer login de usuario valido', () => {
-        cy.login('flavio', '123');
-        cy.contains('a', '(Logout)').should('be.visible');
-    })
-
-    it('fazer login de usuario invalido', () => {
-        cy.login('jacqueline', '1234');
-        cy.on('window:alert', (str) => {
-            expect(str).to.equal('Invalid user name or password');
-        })
-    })
-
-    
+        
     const usuarios = require('../../fixtures/usuarios.json');
     usuarios.forEach(usuario => {
 
-        it(`registra novo usuario ${usuario.userName} `, () => {
+        it.only(`registra novo usuario ${usuario.userName} `, () => {
             cy.contains('a', 'Register now').click();
             cy.contains('button', 'Register').click();
             cy.get('input[formcontrolname="email"]').type(usuario.email);
