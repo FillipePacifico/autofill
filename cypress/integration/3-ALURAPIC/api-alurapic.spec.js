@@ -1,5 +1,7 @@
 describe('Buscar fotos e dados', ()=> {
 
+
+    const tempoEsperado = 7000  // criar váriavel para delimitar o tempo máximo esperado
     it('buscar fotos do flavio', ()=> {
         cy.request({
             method: 'GET',
@@ -9,6 +11,7 @@ describe('Buscar fotos e dados', ()=> {
            expect(res.body).is.not.empty
            expect(res.body[0]).to.have.property('description')
            expect(res.body[0].description).to.be.equal('Farol iluminado') 
+           expect(res.duration).to.be.lte(tempoEsperado) // usar o conceito .to.be.lte (menor que...)
         }
 
         )
